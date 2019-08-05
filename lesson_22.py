@@ -23,9 +23,9 @@ def BalancedParentheses(N):
   res = recParentheses(N, paren=None)
   for i in range(len(res)):
     if i == 0:
-      result = '"' + result + res[i]
+      result = result + res[i]
     elif i == len(res)-1:
-      result = result + res[i] + '"'
+      result = result + res[i]
     else:
       result = result + res[i] +' '
   return result
