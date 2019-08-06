@@ -7,8 +7,7 @@ def recParenthese(output, open, close, N,res):
     if close<open:
       recParenthese(output + ')', open, close + 1, N,res)
   return res
-
-
+  
 def BalancedParentheses(N):
   res = []
   result = ''
