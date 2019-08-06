@@ -12,14 +12,16 @@ def recParentheses(N, paren=None):
         if not paren:
           paren = N
         string = "".join(["(" * paren, ")" * paren ])
-        if paren < N-1:
+        if paren == N-1:
+          fstring = '()'*(N-paren) + string
+          string += "()" * (N-paren) 
+          dstring += '(' + '()'*paren + ')' + '()'*(N-paren-1)
+        elif paren < N-1 :
           dstring = string + "".join(["(" * (N-paren), ")" * (N-paren)]) + ' '
-        if paren < N:
           dstring += '(' + '()'*paren + ')' + '()'*(N-paren-1)
           fstring = "()" * (N-paren) + string 
           string += "()" * (N-paren) 
-          if paren == N//2:  
-            gstring = '()'*(N-paren-1) + '(' + '()'*paren + ')' 
+          gstring = '()'*(N-paren-1) + '(' + '()'*paren + ')' 
         return [string] + [fstring] + [dstring] + [gstring] + recParentheses(N, paren-1)
 
 def BalancedParentheses(N):
@@ -42,9 +44,9 @@ def BalancedParentheses(N):
 
 #print(BalancedParentheses(2))
 #print(BalancedParentheses(3))
-print(BalancedParentheses(4))
+#print(BalancedParentheses(4))
 #print(BalancedParentheses(5))
-#print(BalancedParentheses(6))
+print(BalancedParentheses(6))
 #print(BalancedParentheses(7))
 #print(BalancedParentheses(8))
 #print(BalancedParentheses(9))
