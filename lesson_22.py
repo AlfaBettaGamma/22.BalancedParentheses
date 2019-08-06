@@ -1,42 +1,17 @@
-def recParentheses(N, paren=None):
-  dstring = ''
-  fstring = ''
-  gstring = ''
-  if N == 1:
-    res = ['()']
-    return res
+def recParenthese(output, open, close, N,res):
+  if open == N and close == N:
+    res.append(output)
   else:
-      if paren == 1:
-        return ["()" * N]
-      else:
-        if not paren:
-          paren = N
-        string = "".join(["(" * paren, ")" * paren ])
-        if paren == N-1:
-          fstring = '()'*(N-paren) + string
-          string += "()" * (N-paren) 
-          dstring += '(' + '()'*paren + ')' + '()'*(N-paren-1)
-        elif paren < N-1 :
-          dstring = string + "".join(["(" * (N-paren), ")" * (N-paren)]) + ' '
-          dstring += '(' + '()'*paren + ')' + '()'*(N-paren-1)
-          fstring = "()" * (N-paren) + string 
-          string += "()" * (N-paren) 
-          gstring = '()'*(N-paren-1) + '(' + '()'*paren + ')' 
-        return [string] + [fstring] + [dstring] + [gstring] + recParentheses(N, paren-1)
+    if open < N:
+      recParenthese(output + '(', open + 1, close, N,res)
+    if close<open:
+      recParenthese(output + ')', open, close + 1, N,res)
+  return res
+
 
 def BalancedParentheses(N):
-  res = ''
+  res = []
   result = ''
-  n = 0
-  res = recParentheses(N, paren=None)
-  n = res.count('')
-  for i in range(n):
-    res.remove('')
-  for i in range(len(res)):
-    if i == 0:
-      result = result + res[i] + ' '
-    elif i == len(res)-1:
-      result = result + res[i]
-    else:
-      result = result + res[i] + ' '
+  res = recParenthese('', 0, 0, N,res)
+  result = ' '.join(res)
   return result
